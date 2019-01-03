@@ -2,7 +2,7 @@
 // each Vuex instance is just a single state tree.
 export default {
   version: __VERSION,
-  appName: 'MEVN Example App',
+  appName: 'Integr8tor',
   // here we will keep all modules list
   modules: [
     /* the structure of module

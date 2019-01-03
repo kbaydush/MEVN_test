@@ -18,6 +18,17 @@ import Vuex from 'vuex'
 Vue.use(Vuex);
 import store from '../store'
 
+// Sample route
+// import sample from '@/views/sample'
+
+// Pages
+// Containers
+
+// import Register from './pages/Register'
+// import Register from '@/views/pages/Register'
+// import Login from './pages/Login'
+// import Dashboard from './pages/user/Dashboard'
+
 Vue.use(Router)
 
 Vue.use(VueAxios, axios);
@@ -89,8 +100,23 @@ const router = new Router({
   routes,
 })
 
-
+//guard clause
+// router.beforeEach((to, from, next) => {
+//   if (to.matched.some(record => record.meta.requiresAuth) && store.state.isLoggedIn == false) {
+//     // store.commit("setGlobalError", "You need to log in before you can perform this action.")
+//     next("/login")
+//   } else {
+//     next()
+//   }
+// })
+// App.router = Vue.router
 Vue.router = router
+
+Vue.use(require('@websanova/vue-auth'), {
+  auth  : require('@websanova/vue-auth/drivers/auth/bearer.js'),
+  http  : require('@websanova/vue-auth/drivers/http/axios.1.x.js'),
+  router: require('@websanova/vue-auth/drivers/router/vue-router.2.x.js'),
+})
 
 
 export default router
