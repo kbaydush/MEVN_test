@@ -31,6 +31,10 @@ Route::post('refresh', 'AuthController@refresh');
 Route::post('me', 'AuthController@me');
 });
 
+Route::get('alltasks', 'ApiController@list');
+Route::get('tasks/{id}', 'ApiController@getTasksByUser');
+Route::put('task/{id}', 'ApiController@edit');
+
 Route::group(['middleware' => 'jwt.auth'], function(){
     Route::get('auth/user', 'AuthController@user');
     Route::post('auth/logout', 'AuthController@logout');
