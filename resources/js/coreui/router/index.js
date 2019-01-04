@@ -2,6 +2,9 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Full from '@/containers/Full'
 
+// Views
+import Dashboard from '@/views/templates/Dashboard'
+import AdminDashboard from '@/views/pages/admin/Dashboard'
 
 // Views - Pages
 import Page404 from '@/views/pages/Page404'
