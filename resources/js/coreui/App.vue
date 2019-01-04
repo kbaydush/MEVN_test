@@ -1,8 +1,13 @@
 <template>
-  <router-view/>
+      <router-view/>
 </template>
 
 <script>
-  export default { name: 'App' }
+  export default {
+    computed:{
+      currentUser(){
+        return this.$store.getters.currentUser
+      }
+    }
+  }
 </script>
-

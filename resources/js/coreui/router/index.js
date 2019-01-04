@@ -39,22 +39,19 @@ const routes = [
     path     : '/',
     name     : 'home',
     component: Full,
-    meta     : { requiresAuth: true },
+    meta     : { auth: undefined },
   },
   {
     path     : '/register',
     name     : 'register',
     component: Register,
-    meta     : { guest: true,
-                 requiresAuth: true,
-    },
+    meta     : { auth: false },
   },
   {
     path     : '/login',
     name     : 'login',
     component: Login,
-    meta     : { guest: true,
-      requiresAuth: true, },
+    meta     : { auth: false },
   },
   // USER ROUTES
   {
@@ -99,16 +96,6 @@ const router = new Router({
   mode   : 'history',
   routes,
 })
-
-//guard clause
-// router.beforeEach((to, from, next) => {
-//   if (to.matched.some(record => record.meta.requiresAuth) && store.state.isLoggedIn == false) {
-//     // store.commit("setGlobalError", "You need to log in before you can perform this action.")
-//     next("/login")
-//   } else {
-//     next()
-//   }
-// })
 // App.router = Vue.router
 Vue.router = router
 
@@ -118,5 +105,13 @@ Vue.use(require('@websanova/vue-auth'), {
   router: require('@websanova/vue-auth/drivers/router/vue-router.2.x.js'),
 })
 
-
+Vue.router.beforeEach((to, from, next) => {
+  const authRequired = to.matched.some((route) => route.meta.auth)
+  let authed = store.getters.isLoggedin(store.state)
+  if (authRequired && !authed) {
+    next('/api/login')
+  } else {
+    next()
+  }
+})
 export default router
