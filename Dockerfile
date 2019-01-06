@@ -62,8 +62,8 @@ RUN grep -q "APP_KEY=" .env || echo "APP_KEY=" >> .env
 RUN php artisan key:generate \
   && php artisan config:cache \
   && php artisan route:cache \
-  && php artisan view:cache
-RUN chown -R www-data:www-data /var/www exit 0
+  && php artisan view:cache; exit 0
+RUN chown -R www-data:www-data /var/www; exit 0
 RUN rm -rf /var/www/html/ /var/www/deploy/; exit 0
 
 EXPOSE 80 443
