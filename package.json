@@ -24,7 +24,7 @@
     "babel-plugin-wildcard": "^5.0.0",
     "babel-preset-stage-2": "^6.24.1",
     "cross-env": "^5.1",
-    "eslint": "^5.8.0",
+    "eslint": "^4.19.1",
     "eslint-config-adenvt": "^1.0.0",
     "eslint-config-prettier": "^3.3.0",
     "eslint-config-standard": "^12.0.0",
@@ -44,6 +44,7 @@
     "stylelint": "^9.7.1",
     "stylelint-config-sass-guidelines": "^5.2.0",
     "stylelint-scss": "^3.3.2",
+    "uglifyjs-webpack-plugin": "^2.1.1",
     "vue-template-compiler": "^2.5.21"
   },
   "dependencies": {
