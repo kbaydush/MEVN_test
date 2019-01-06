@@ -9,7 +9,7 @@ before_install:
   - cp .env.travis .env
 
 install:
-  - docker-compose up -d --build run prod
+  - docker-compose up -d --build prod
 
 script:
   - curl --silent --fail --show-error http://127.0.0.1:88 > $HOME/index.html
