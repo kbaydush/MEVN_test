@@ -38,7 +38,7 @@ export default {
       return this.$route.name
     },
     nav () {
-      return this.$store.state.tasks
+      alert(this.$store.state.tasks)
     },
     list () {
       return this.$route.matched

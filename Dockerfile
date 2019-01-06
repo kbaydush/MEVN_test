@@ -64,8 +64,8 @@ RUN php artisan jwt:secret \
   && php artisan route:cache \
   && php artisan view:cache
 RUN chown -R www-data:www-data /var/www
-RUN rm -rf /var/www/html/ /var/www/deploy/
-
+RUN rm -rf /var/www/html/
+RUN rm -rf /var/www/deploy/
 EXPOSE 80 443
 
 CMD service nginx start && php-fpm
