@@ -1,6 +1,25 @@
-// mutations are operations that actually mutates the state.
-// each mutation handler gets the entire state tree as the
-// first argument, followed by additional payload arguments.
-// mutations must be synchronous and can be recorded by plugins
-// for debugging purposes.
-export default {}
+export const loadTasks = (state, tasks) => {
+  state.tasks = tasks
+};
+
+export const clearTasks = (state) => {
+  state.tasks = []
+  state.orderBy = 'name'
+  state.loadedTask = null
+};
+
+export const loadTask = (state, task) => {
+  state.loadedTask = task
+};
+
+export const clearLoadedTasks = state => {
+  state.loadedPark = null
+};
+
+export const clearMessage = state => {
+  state.message = ''
+};
+
+export const setLoading = (state, status) => {
+  state.loading = status
+};

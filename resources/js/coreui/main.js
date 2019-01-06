@@ -11,11 +11,14 @@ import Loading from './components/Loading'
 import Select2 from './components/Select'
 import App from './App'
 import router from './router'
-import storeData from './store'
 import VeeValidate from 'vee-validate'
+import {store} from './store/index'
+import Buefy from 'buefy'
+// import 'buefy/lib/buefy.css'
 
 Vue.use(VeeValidate);
-const store = new Vuex.Store(storeData);
+Vue.use(Buefy);
+// const store = new Vuex.Store(storeData);
 
 Vue.use(BootstrapVue)
 Vue.use(Notifications)
@@ -39,8 +42,13 @@ Vue.component('b-datepicker', {
 
 export default new Vue({
   el        : '#app',
-  router    : router,
   store     : store,
+  router    : router,
   template  : '<App/>',
   components: { App },
+  render: h => h(App),
+  created(){
+    this.$store.dispatch('setLoading', true)
+    this.$store.dispatch('loadTasks')
+  }
 })

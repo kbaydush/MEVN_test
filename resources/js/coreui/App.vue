@@ -7,6 +7,9 @@
     computed:{
       currentUser(){
         return this.$store.getters.currentUser
+      },
+      loading() {
+          return this.$store.getters.isLoading;
       }
     }
   }

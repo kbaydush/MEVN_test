@@ -1,69 +1,32 @@
+import Vue from 'vue'
+import Vuex from 'vuex'
+import * as getters  from './getters';
+import * as actions  from './actions';
+import * as mutations  from './mutations';
 import {getLoggedinUser} from '../partials/auth'
 
 const user = getLoggedinUser()
 
-export default {
-  state: {
-    currentUser: user,
-    isLoggedIn: !!user,
-    loading: false,
-    auth_error: null,
-    reg_error:null,
-    registeredUser: null,
-  },
-  getters: {
-    isLoading(state){
-      return state.loading;
-    },
-    isLoggedin(state){
-      return state.isLoggedin;
-    },
-    currentUser(state){
-      return state.currentUser;
-    },
-    authError(state){
-      return state.auth_error;
-    },
-    regError(state){
-      return state.reg_error;
-    },
-    registeredUser(state){
-      return state.registeredUser;
-    },
-  },
-  mutations: {
-    login(state){
-      state.loading = true;
-      state.auth_error = null;
-    },
-    loginSuccess(state, payload){
-      state.auth_error = null;
-      state.isLoggedin = true;
-      state.loading = false;
-      state.currentUser = Object.assign({}, payload.user, {token: payload.access_token});
+Vue.use(Vuex)
+const API_KEY = 'AIzaSyDQqVC5zx4MmFrJOH2O5vzq0wRokA7ip3o'
+// const WEATHER_API_KEY = '<< your OpenWeather api key here >>'
+// const NPS_API_KEY = '<< your NPS api key here >>'
 
-      localStorage.setItem("user", JSON.stringify(state.currentUser));
+export const store = new Vuex.Store({
+  state: {
+      currentUser: user,
+      isLoggedIn: !!user,
+      loading: false,
+      auth_error: null,
+      reg_error: null,
+      registeredUser: null,
+      message: 'Loading...',
+      apiKey: API_KEY,
+      // apiWeatherKey: OW_API_KEY
     },
-    loginFailed(state, payload){
-      state.loading = false;
-      state.auth_error = payload.error;
-    },
-    logout(state){
-      localStorage.removeItem("user");
-      state.isLoggedin = false;
-      state.currentUser = null;
-    },
-    registerSuccess(state, payload){
-      state.reg_error = null;
-      state.registeredUser = payload.user;
-    },
-    registerFailed(state, payload){
-      state.reg_error = payload.error;
-    },
-  },
-  actions: {
-    login(context){
-      context.commit("login");
-    }
-  }
-};
+    mutations,
+    actions,
+    getters,
+})
+
+export default store

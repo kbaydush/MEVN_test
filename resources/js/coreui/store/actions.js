@@ -1,3 +1,80 @@
-// actions are functions that cause side effects and can involve
-// asynchronous operations.
-export default {}
+import Vue from 'vue';
+import { db } from '../firebase'
+import router from '../router/index'
+import {HTTP} from '../axios';
+
+export const loadTasks = ({commit, state}) => {
+  const tasks = db.collection('tasks')
+    //.orderBy(state.orderBy)
+
+  tasks.onSnapshot(querySnapshot => {
+    const Tasks = []
+    querySnapshot.forEach(doc => {
+      Tasks.push({ id: doc.id, ...doc.data() })
+    })
+    commit('loadTasks', Tasks)
+    commit('setLoading', false)
+  })
+};
+
+export const addNewTask = ({commit}, newPark) => {
+  db.collection('tasks').add(newPark)
+  router.push('/tasks')
+};
+
+// export const loadTask = ({commit, state}, park) => {
+//   commit('clearLoadedPark')
+//   HTTP.get('parks?parkCode=' + park.parkCode + '&api_key=' + state.apiKey)
+//     .then(response => {
+//       let objPark = response.data.data[0]
+//       commit('loadParkImage', park.image)
+//       commit('loadPark', objPark)
+//       let strLatLong = objPark.latLong
+//       let arrLatLong = strLatLong.split(",");
+//       let lat = arrLatLong[0].replace('lat:', '').trim()
+//       let longitude = arrLatLong[1].replace('long:', '').trim()
+//
+//       let str = `weather?lat=${lat}&lon=${longitude}&APPID=${state.apiWeatherKey}`
+//
+//       HTTP2.get(`${str}`)
+//         .then(response => {
+//           commit('loadParkWeather', response.data)
+//           router.push('parkDetails')
+//         })
+//     })
+//     .catch(err => {
+//       console.log(err);
+//     })
+// };
+
+export const deleteTask = ({commit}, id) => {
+  db.collection('tasks').doc(id).delete()
+  router.push('/tasks')
+};
+
+export const clearParks = ({commit}) => {
+  commit('clearTasks')
+  router.push('/')
+};
+
+export const orderBy = ({commit, dispatch}) => {
+  commit('orderBy')
+  dispatch('loadTasks', 'yes')
+  router.push('/tasks')
+};
+
+export const clearMessage = ({commit}) => {
+  commit('clearMessage')
+};
+
+// export const setParkState = ({commit}, strState) => {
+//   if(strState === 'United States Virgin Islands'){
+//     commit('setParkState', 'VI')
+//   } else {
+//     commit('setParkState', strState)
+//   }
+// };
+
+export const setLoading = ({commit}, status) => {
+  commit('setLoading', status)
+};

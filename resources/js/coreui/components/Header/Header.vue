@@ -16,15 +16,43 @@
       <span class="navbar-toggler-icon"/>
     </button>
     <b-navbar-nav class="d-md-down-none">
-      <b-nav-item class="px-3">Dashboard</b-nav-item>
+      <!--b-nav-item class="px-3">Dashboard</b-nav-item>
       <b-nav-item class="px-3">Users</b-nav-item>
-      <b-nav-item class="px-3">Settings</b-nav-item>
+      <b-nav-item class="px-3">Settings</b-nav-item-->
       <template v-if="!currentUser">
         <li>
-          <router-link to="/login" class="nav-link">Loginn</router-link>
+          <b-nav-item class="px-3"> </b-nav-item>
         </li>
         <li>
-          <router-link to="/register" class="nav-link">Register</router-link>
+          <b-nav-item class="px-3"> </b-nav-item>
+        </li>
+        <li>
+          <b-nav-item class="px-3"> </b-nav-item>
+        </li>
+        <li>
+          <b-nav-item class="px-3"> </b-nav-item>
+        </li>
+        <li>
+          <b-nav-item class="px-3"> </b-nav-item>
+        </li>
+        <li>
+          <b-nav-item class="px-3"> </b-nav-item>
+        </li>
+        <li>
+          <b-nav-item class="px-3"> </b-nav-item>
+        </li>
+
+        <li>
+          <b-nav-item class="px-2 b-a-2"> <router-link to="/login" class="nav-link">Login</router-link></b-nav-item>
+        </li>
+        <li>
+          <b-nav-item class="px-3"> </b-nav-item>
+        </li>
+        <li>
+          <b-nav-item class="px-3"> </b-nav-item>
+        </li>
+        <li>
+          <b-nav-item class="px-2 b-a-2"><router-link to="/register" class="nav-link">Register</router-link></b-nav-item>
         </li>
       </template>
       <template v-else>
