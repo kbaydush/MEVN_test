@@ -12,15 +12,13 @@
           <router-view/>
         </div>
       </main>
-      <AppAside/>
+      <!--w-->
     </div>
-    <AppFooter/>
   </div>
 </template>
 
 <script>
-import nav from '../_nav'
-import { Header as AppHeader, Sidebar, Aside as AppAside, Footer as AppFooter, Breadcrumb } from '../components'
+import { Header as AppHeader, Sidebar, Aside as AppAside, Breadcrumb } from '../components'
 
 export default {
   name      : 'Full',
@@ -28,18 +26,19 @@ export default {
     AppHeader,
     Sidebar,
     AppAside,
-    AppFooter,
     Breadcrumb,
   },
   data () {
     return {
-      nav   : nav.items,
       offset: true,
     }
   },
   computed: {
     name () {
       return this.$route.name
+    },
+    nav () {
+      return this.$store.state.tasks
     },
     list () {
       return this.$route.matched
@@ -55,6 +54,7 @@ export default {
     },
   },
   mounted () {
+    this.$store.dispatch('loadTasks')
     $(window).on('scroll', this.setPosNotify)
   },
   beforeDestroy () {

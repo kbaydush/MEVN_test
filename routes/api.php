@@ -14,13 +14,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+
+
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-//Route::group(['prefix' => 'api', 'middleware' => 'cors'], function () {
-//    Route::post('auth/register', 'AuthController@register');
-//    Route::post('auth/login', 'AuthController@login');
+//Route::group(['prefix' => 'api'], function () {
+    Route::get('users', 'UserController@list');
+    Route::get('tasks', 'TaskController@list');
+    Route::get('task/{id}', 'TaskController@get');
 //});
 
 Route::group(['prefix' => 'auth'], function ($router) {
@@ -31,9 +35,6 @@ Route::post('refresh', 'AuthController@refresh');
 Route::post('me', 'AuthController@me');
 });
 
-Route::get('alltasks', 'ApiController@list');
-Route::get('tasks/{id}', 'ApiController@getTasksByUser');
-Route::put('task/{id}', 'ApiController@edit');
 
 Route::group(['middleware' => 'jwt.auth'], function(){
     Route::get('auth/user', 'AuthController@user');

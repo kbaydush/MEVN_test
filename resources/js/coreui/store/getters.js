@@ -1,32 +1,19 @@
-// getters are functions like computed
-export default {
-  moduleListInSidebar: state => {
-    var items = [];
+export const isLoading = state => {
+  return state.loading;
+};
 
-    items.push({
-      title  : true,
-      name   : state.appName,
-      class  : '',
-      wrapper: {
-        element   : '',
-        attributes: {},
-      },
-    });
-
-    for(let i in state.tasks) {
-
-      // get only enabled modules
-      if (!state.tasks[i].isEnabled) {
-        continue;
-      }
-      let item = {
-        name : state.tasks[i].friendlyName,
-        url  : ''
-      };
-
-      items.push(item);
-    }
-
-    return items;
-  }
-}
+export const isLoggedin = state => {
+  return state.isLoggedin;
+};
+export const currentUser = state => {
+  return state.currentUser;
+};
+export const authError = state => {
+  return state.auth_error;
+};
+export const regError = state => {
+  return state.reg_error;
+};
+export const registeredUser = state => {
+  return state.registeredUser;
+};

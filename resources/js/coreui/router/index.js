@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import store from '../store/index'
 import Full from '@/containers/Full'
 
 // Views
@@ -16,7 +17,6 @@ import VueAxios from 'vue-axios'
 
 import Vuex from 'vuex'
 Vue.use(Vuex);
-import store from '../store'
 
 // Sample route
 // import sample from '@/views/sample'
@@ -32,7 +32,7 @@ import store from '../store'
 Vue.use(Router)
 
 Vue.use(VueAxios, axios);
-axios.defaults.baseURL = 'http://localhost:8000'
+axios.defaults.baseURL = 'http://localhost:8080'
 // Routes
 const routes = [
   {
@@ -107,7 +107,7 @@ Vue.use(require('@websanova/vue-auth'), {
 
 Vue.router.beforeEach((to, from, next) => {
   const authRequired = to.matched.some((route) => route.meta.auth)
-  let authed = store.getters.isLoggedin(store.state)
+  let authed = store.getters.isLoggedin
   if (authRequired && !authed) {
     next('/api/login')
   } else {
