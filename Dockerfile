@@ -26,7 +26,7 @@ RUN docker-php-ext-install zip
 
 WORKDIR /var/www
 
-ENV TZ=Asia/Jakarta
+ENV TZ=Europe/Kiev
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 ENV COMPOSER_ALLOW_SUPERUSER=1
@@ -59,7 +59,7 @@ RUN if [ ${FORCE_HTTPS} = true ]; then \
 COPY --from=compiler /var/www /var/www
 RUN composer dump-autoload --no-dev --optimize
 RUN grep -q "APP_KEY=" .env || echo "APP_KEY=" >> .env
-RUN php artisan key:generate \
+RUN php artisan jwt:secret \
   && php artisan config:cache \
   && php artisan route:cache \
   && php artisan view:cache
