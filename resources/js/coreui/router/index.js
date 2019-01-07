@@ -32,7 +32,6 @@ Vue.use(Vuex);
 Vue.use(Router)
 
 Vue.use(VueAxios, axios);
-axios.defaults.baseURL = 'http://localhost:8080'
 // Routes
 const routes = [
   {

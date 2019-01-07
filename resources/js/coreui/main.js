@@ -14,6 +14,8 @@ import router from './router'
 import VeeValidate from 'vee-validate'
 import {store} from './store/index'
 import Buefy from 'buefy'
+import VueFire from 'vuefire'
+Vue.use(VueFire)
 // import 'buefy/lib/buefy.css'
 
 Vue.use(VeeValidate);

@@ -128,8 +128,6 @@ export default {
           this.$auth.token('access_token', response.data.access_token)
         },
         error     : function (res) {
-          console.log(res.data)
-          console.log(123)
           this.$notify({
             component: {
               template: '<span><strong>Oops, something went wrong... </strong><br>Not possible to login because of an internal server error</span>'

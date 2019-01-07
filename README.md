@@ -1,9 +1,8 @@
-# Laravel CoreUI Vue - Engineering Test
+# Laravel + Vue + Firebase - Engineering Test
 
-> Laravel + CoreUI + Vue Boilerplate
+> Laravel + CoreUI + Vue Boilerplate + firebase
 
-[![PHP version](https://badge.fury.io/ph/adenvt%2Flaravel-coreui-vue.svg)](https://badge.fury.io/ph/adenvt%2Flaravel-coreui-vue)
-[![Build Status](https://travis-ci.com/adenvt/laravel-coreui-vue.svg?branch=master)](https://travis-ci.com/adenvt/laravel-coreui-vue) [![Greenkeeper badge](https://badges.greenkeeper.io/adenvt/laravel-coreui-vue.svg)](https://greenkeeper.io/)
+[![Build Status](https://travis-ci.com/kbaydush/MEVN_test.svg?branch=master)](https://travis-ci.com/kbaydush/MEVN_test) [![Greenkeeper badge](https://badges.greenkeeper.io/adenvt/laravel-coreui-vue.svg)](https://greenkeeper.io/)
 
 ## What's inside
 * [Laravel][laravel] 5.7, A PHP framework for web artisans
@@ -31,7 +30,7 @@
 ## How to Install
 * Install using composer (doesn't need to clone)
 ```bash
-composer create-project --prefer-dist adenvt/laravel-coreui-vue project_name
+composer create-project --prefer-dist kbaydush/MEVN_test project_name
 ```
 * Install Dependencies
 ```bash
@@ -112,3 +111,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 [docker-compose]: https://docs.docker.com/compose/
 [offline-plugin]: https://github.com/NekR/offline-plugin
 [workbox]: https://developers.google.com/web/tools/workbox/
+[firebase]: https://firebase.google.com
