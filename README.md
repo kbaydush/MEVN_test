@@ -58,7 +58,6 @@ MIT License
 * JSON PHP Extension
 * **Node** >= 8.9.4
 * **NPM** >= 5.6.0
-* For Ubuntu, require `apt-get install libpng16-dev`, [see](https://github.com/imagemin/imagemin-mozjpeg/issues/28)
 
 
 
