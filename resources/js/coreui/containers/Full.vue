@@ -45,9 +45,6 @@ export default {
     name () {
       return this.$route.name
     },
-    // nav () {
-    //   return this.$store.getters.userListInSidebar;
-    // },
     list () {
       return this.$route.matched
     },
