@@ -4,7 +4,7 @@ LABEL maintainer="<kostiantyn.baidush@gmail.com>"
 
 WORKDIR /var/www
 COPY package.json /var/www
-COPY yarn.lock /var/www
+COPY package-lock.json.lock /var/www
 RUN npm install
 
 COPY . /var/www

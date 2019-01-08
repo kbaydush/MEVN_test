@@ -92,7 +92,7 @@
         login(this.$data.formLogin)
           .then(res => {
             this.$store.commit("loginSuccess", res);
-            this.$router.push({path: '/dashboard'});
+            this.$router.push({path: '/'});
           })
           .catch(error => {
             this.$store.commit("loginFailed", {error});
@@ -106,7 +106,7 @@
       registeredUser(){
         return this.$store.getters.registeredUser
       }
-    }
+    },
   }
 </script>
 

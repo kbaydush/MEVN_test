@@ -16,6 +16,7 @@
               <span>{{task.desc}}</span>
             </article>
           </div-->
+
           <router-view/>
         </div>
       </main>
@@ -27,6 +28,10 @@
 <script>
 import { Header as AppHeader, Sidebar, Aside as AppAside, Breadcrumb } from '../components'
 import nav from '../_nav'
+
+import BarExample from '../views/sample/charts/BarExample'
+import PieExample from '../views/sample/charts/PieExample'
+
 export default {
   name      : 'Full',
   components: {
@@ -34,6 +39,8 @@ export default {
     Sidebar,
     AppAside,
     Breadcrumb,
+    BarExample,
+    PieExample,
   },
   data () {
     return {
