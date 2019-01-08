@@ -38,6 +38,7 @@
 </template>
 
 <script>
+  import { db } from "../../../firebase";
   /**
    * Randomize array element order in-place.
    * Using Durstenfeld shuffle algorithm.
@@ -51,7 +52,7 @@
     }
     return array
   }
-  import { db } from "../../../firebase";
+
   export default {
     name : 'CTable',
     props: {
@@ -80,38 +81,43 @@
         default: false,
       },
     },
-    firestore () {
-
-      const uId = this.currentUser
-      const userId = uId.id
-      const query = db.collection('tasks').orderBy('createdAt').where('userId', '==', userId);
-
-      query.get().then(snapshot => {
-        snapshot.docs.forEach(doc => {
-
-            this.items.push(doc.data());
-            // this.items.push(doc.id);
-            console.log(this.items);
-        })
-      })
-
+    beforeMount(){
+      this.getTasks()
     },
     computed:{
       currentUser: function() {
         return this.$store.getters.currentUser
       },
     },
+    firestore() {
+      const uId = this.currentUser
+      const userId = uId.id
+      console.log(userId);
+      const query = db.collection('tasks').orderBy('createdAt').where('userId', '==', userId);
+      console.log(query);
+      query.get().then(snapshot => {
+        snapshot.docs.forEach(doc => {
+
+          this.items.push(doc.data());
+          // this.items.push(doc.id);
+          console.log(this.items);
+        })
+      })
+
+    },
     data: () => {
       return {
         sortBy: 'createdAt',
         sortDesc: false,
-        items: [],
-        //   shuffleArray([
-        //   {
-        //     name  : 'Samppa Nori', createdAt: '2012/01/01', desc: 'Member', status    : 'Active',
-        //   },
-        //
-        // ]),
+        items: [
+          // {
+          //   title  : 'Samppa Nori', createdAt: '2012/01/01', desc      : 'Member', status    : 'In progress',
+          // },
+          // {
+          //   title  : 'Estavan Lykos', createdAt: '2012/02/01', desc      : 'Staff', status    : 'New',
+          // },
+
+        ],
         fields: [
           { key: 'title'},
           { key: 'desc'},
@@ -133,7 +139,7 @@
       getRowCount (items) {
         return items.length
       },
-      deleteRow (item) { console.log(item.userId)
+      deleteRow (item) {
         db.collection("tasks").where('title', '==', item.title).delete();
       },
     },

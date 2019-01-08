@@ -142,4 +142,3 @@ Vue.use(require('@websanova/vue-auth'), {
 //   }
 // );
 export default router;
-

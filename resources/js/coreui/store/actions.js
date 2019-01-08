@@ -1,23 +1,23 @@
 import Vue from 'vue';
-import { db } from '../firebase'
+// import { db } from '../firebase'
 import router from '../router/index'
 // import {HTTP} from '../axios';
 import UsersApi from '@/api/Users';
 // import {login} from "./mutations";
-
-export const loadTasks = ({commit, state}) => {
-  const tasks = db.collection('tasks').orderBy('createdAt')
-    //.orderBy(state.orderBy)
-
-  tasks.onSnapshot(querySnapshot => {
-    const Tasks = []
-    querySnapshot.forEach(doc => {
-      Tasks.push({ id: doc.id, ...doc.data() })
-    })
-    commit('loadTasks', Tasks)
-    commit('setLoading', false)
-  })
-};
+//
+// export const loadTasks = ({commit, state}) => {
+//   const tasks = db.collection('tasks').orderBy('createdAt')
+//     //.orderBy(state.orderBy)
+//
+//   tasks.onSnapshot(querySnapshot => {
+//     const Tasks = []
+//     querySnapshot.forEach(doc => {
+//       Tasks.push({ id: doc.id, ...doc.data() })
+//     })
+//     commit('loadTasks', Tasks)
+//     commit('setLoading', false)
+//   })
+// };
 
 export const getUsers = (context) => {
   UsersApi
@@ -31,10 +31,10 @@ export const getUsers = (context) => {
     });
 };
 
-export const addNewTask = ({commit}, newTask) => {
-  db.collection('tasks').add(newTask)
-  router.push('/tasks')
-};
+// export const addNewTask = ({commit}, newTask) => {
+//   db.collection('tasks').add(newTask)
+//   router.push('/tasks')
+// };
 
 // export const loadTask = ({commit, state}, park) => {
 //   commit('clearLoadedPark')
@@ -61,10 +61,10 @@ export const addNewTask = ({commit}, newTask) => {
 //     })
 // };
 
-export const deleteTask = ({commit}, id) => {
-  db.collection('tasks').doc(id).delete()
-  router.push('/tasks')
-};
+// export const deleteTask = ({commit}, id) => {
+//   db.collection('tasks').doc(id).delete()
+//   router.push('/tasks')
+// };
 
 export const clearParks = ({commit}) => {
   commit('clearTasks')

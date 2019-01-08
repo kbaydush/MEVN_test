@@ -14,7 +14,11 @@ import router from './router'
 import VeeValidate from 'vee-validate'
 import {store} from './store/index'
 import Buefy from 'buefy'
+
+
+import Vuetify from 'vuetify'
 import VueFire from 'vuefire'
+Vue.use(Vuetify)
 Vue.use(VueFire)
 // import 'buefy/lib/buefy.css'
 Vue.use(VeeValidate, {
@@ -52,7 +56,7 @@ export default new Vue({
   components: { App },
   render: h => h(App),
   created(){
-    this.$store.dispatch('setLoading', true)
-    this.$store.dispatch('loadTasks')
+    // this.$store.dispatch('setLoading', true)
+    // this.$store.dispatch('loadTasks')
   },
 })

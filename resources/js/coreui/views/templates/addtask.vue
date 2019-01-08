@@ -59,18 +59,18 @@
     name: 'HelloWorld',
     data () {
       return {
-        tasks: [],
+        // tasks: [],
         title: '',
         desc: '',
         status: '',
         userId: '',
       }
     },
-    firestore () {
-      return {
-        tasks: db.collection('tasks').orderBy('createdAt')
-      }
-    },
+    // firestore () {
+    //   return {
+    //     tasks: db.collection('tasks').orderBy('createdAt')
+    //   }
+    // },
     computed:{
       currentUser: function() {
         return this.$store.getters.currentUser

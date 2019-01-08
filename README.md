@@ -1,6 +1,6 @@
-# Laravel + Vue + Firebase - Engineering Test
+# Laravel + MEVN + Firebase
 
-> Laravel + CoreUI + Vue Boilerplate + firebase
+> Engineering test
 
 [![Build Status](https://travis-ci.com/kbaydush/MEVN_test.svg?branch=master)](https://travis-ci.com/kbaydush/MEVN_test) [![Greenkeeper badge](https://badges.greenkeeper.io/adenvt/laravel-coreui-vue.svg)](https://greenkeeper.io/)
 
@@ -14,15 +14,13 @@
 ```bash
 cd project_name
 
-yarn install
+npm install
 ```
 
 ```
 * Compile Static Asset
 ```bash
-## for Development
 npm run dev
-
 ```
 
 ```
@@ -30,7 +28,6 @@ npm run dev
 ```bash
 ## for Development
 php artisan serve --port=8888
-
 ```
 
 * Open browser, goto [http://localhost:8888](http://localhost:8888)
@@ -42,7 +39,7 @@ MIT License
 ## What's inside
 * [Laravel][laravel] 5.7, A PHP framework for web artisans
 * [Core UI][coreui] for Vue, Free Bootstrap Admin Template
-* [firebase]: https://firebase.google.com
+* [FIREBASE]: https://firebase.google.com
 * Usefull library: [Axios][axios], [jQuery][jquery], [Moment.js][moment], [Lodash][lodash]
 * [Vue Router][vue-router] and [Vuex][vuex], set out of the box
 * PWA ready, powered by [Offline-plugin][offline-plugin] and [Workbox][workbox]
@@ -67,6 +64,7 @@ MIT License
 
 [laravel]: https://laravel.com
 [coreui]: https://coreui.io
+[firebase]: https://firebase.google.com
 [axios]: https://github.com/axios/axios
 [jquery]: https://jquery.com/
 [lodash]: https://lodash.com/
@@ -79,4 +77,4 @@ MIT License
 [docker-compose]: https://docs.docker.com/compose/
 [offline-plugin]: https://github.com/NekR/offline-plugin
 [workbox]: https://developers.google.com/web/tools/workbox/
-[firebase]: https://firebase.google.com
+

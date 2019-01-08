@@ -1,14 +1,14 @@
-FROM node:8 AS compiler
+FROM node:11 AS compiler
 
 LABEL maintainer="<kostiantyn.baidush@gmail.com>"
 
 WORKDIR /var/www
 COPY package.json /var/www
 COPY yarn.lock /var/www
-RUN yarn install
+RUN npm install
 
 COPY . /var/www
-RUN yarn run prod
+RUN npm run dev
 RUN rm -rf /var/www/node_modules/
 
 FROM php:7.2-fpm AS server
