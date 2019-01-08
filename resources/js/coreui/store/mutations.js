@@ -42,7 +42,7 @@ export const login = state => {
 export const loginSuccess = (state, payload) => {
   state.auth_error = null;
   state.isLoggedin = true;
-  state.loading = false;
+  state.loading    = false;
   state.currentUser = Object.assign({}, payload.user, {token: payload.access_token});
 
   localStorage.setItem("user", JSON.stringify(state.currentUser));

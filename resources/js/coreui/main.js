@@ -17,8 +17,10 @@ import Buefy from 'buefy'
 import VueFire from 'vuefire'
 Vue.use(VueFire)
 // import 'buefy/lib/buefy.css'
-
-Vue.use(VeeValidate);
+Vue.use(VeeValidate, {
+  inject: true,
+  fieldsBagName: 'veeFields'
+});
 Vue.use(Buefy);
 // const store = new Vuex.Store(storeData);
 
@@ -52,5 +54,5 @@ export default new Vue({
   created(){
     this.$store.dispatch('setLoading', true)
     this.$store.dispatch('loadTasks')
-  }
+  },
 })

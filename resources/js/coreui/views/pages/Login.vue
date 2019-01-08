@@ -123,7 +123,7 @@ export default {
           password: app.password,
         },
         success   : function (response) {
-          alert(response)
+
           console.log(response)
           this.$auth.token('access_token', response.data.access_token)
         },
@@ -141,7 +141,6 @@ export default {
         },
         rememberMe: true,
         redirect  : '/dashboard',
-        url: 'http://localhost:8000/api/login',
         fetchUser : true,
       })
     },

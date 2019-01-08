@@ -6,7 +6,7 @@ import UsersApi from '@/api/Users';
 // import {login} from "./mutations";
 
 export const loadTasks = ({commit, state}) => {
-  const tasks = db.collection('tasks')
+  const tasks = db.collection('tasks').orderBy('createdAt')
     //.orderBy(state.orderBy)
 
   tasks.onSnapshot(querySnapshot => {

@@ -29,6 +29,8 @@ export const store = new Vuex.Store({
     apiKey: API_KEY,
     version: __VERSION,
     appName: 'All Users',
+    tasks: [],
+    fieldsBagName: 'fields',
     },
     mutations,
     actions,

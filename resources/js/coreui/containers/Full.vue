@@ -9,13 +9,13 @@
       <main class="main">
         <breadcrumb :list="list"/>
         <div class="container-fluid">
-          <div>
+          <!--div>
             <article v-for="(task, idx) in tasks" :key="idx">
               <img :src="task.image">
               <h1>{{ task.name }}</h1>
               <span>{{task.desc}}</span>
             </article>
-          </div>
+          </div-->
           <router-view/>
         </div>
       </main>
@@ -26,7 +26,7 @@
 
 <script>
 import { Header as AppHeader, Sidebar, Aside as AppAside, Breadcrumb } from '../components'
-import { db } from "../firebase";
+import nav from '../_nav'
 export default {
   name      : 'Full',
   components: {
@@ -38,21 +38,16 @@ export default {
   data () {
     return {
       offset: true,
-      tasks: []
-    }
-  },
-  firestore () {
-    return {
-      tasks: db.collection('tasks').orderBy('createdAt'),
+      nav: nav.items,
     }
   },
   computed: {
     name () {
       return this.$route.name
     },
-    nav () {
-      return this.$store.getters.userListInSidebar;
-    },
+    // nav () {
+    //   return this.$store.getters.userListInSidebar;
+    // },
     list () {
       return this.$route.matched
     },
