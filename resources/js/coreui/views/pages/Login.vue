@@ -123,13 +123,11 @@ export default {
           password: app.password,
         },
         success   : function (response) {
-          alert(response)
+
           console.log(response)
           this.$auth.token('access_token', response.data.access_token)
         },
         error     : function (res) {
-          console.log(res.data)
-          console.log(123)
           this.$notify({
             component: {
               template: '<span><strong>Oops, something went wrong... </strong><br>Not possible to login because of an internal server error</span>'
@@ -143,7 +141,6 @@ export default {
         },
         rememberMe: true,
         redirect  : '/dashboard',
-        url: 'http://localhost:8000/api/login',
         fetchUser : true,
       })
     },

@@ -12,6 +12,8 @@ import Page404 from '@/views/pages/Page404'
 import Page500 from '@/views/pages/Page500'
 import Login from '@/components/Login'
 import Register from '@/components/Register'
+import tasklist from '@/views/templates/tasklist'
+import addtask from '@/views/templates/addtask'
 import axios from 'axios';
 import VueAxios from 'vue-axios'
 
@@ -32,7 +34,6 @@ Vue.use(Vuex);
 Vue.use(Router)
 
 Vue.use(VueAxios, axios);
-axios.defaults.baseURL = 'http://localhost:8080'
 // Routes
 const routes = [
   {
@@ -40,36 +41,50 @@ const routes = [
     name     : 'home',
     component: Full,
     meta     : { auth: undefined },
-  },
-  {
-    path     : '/register',
-    name     : 'register',
-    component: Register,
-    meta     : { auth: false },
-  },
-  {
-    path     : '/login',
-    name     : 'login',
-    component: Login,
-    meta     : { auth: false },
-  },
-  // USER ROUTES
-  {
-    path     : '/dashboard',
-    name     : 'dashboard',
-    component: Dashboard,
-    meta     : { auth: true },
-  },
-  // ADMIN ROUTES
-  {
-    path     : '/admin',
-    name     : 'admin.dashboard',
-    component: AdminDashboard,
-    meta     : {
-      auth: {
-        roles            : 2, redirect         : { name: 'login' }, forbiddenRedirect: '/403',
+    children : [
+      {
+        path     : '/list',
+        name     : 'tasklist',
+        component: tasklist,
+        meta     : { auth: false},
       },
-    },
+      {
+        path     : '/add',
+        name     : 'addtask',
+        component: addtask,
+        meta     : { auth: false },
+      },
+      {
+        path     : '/register',
+        name     : 'register',
+        component: Register,
+        meta     : { auth: false },
+      },
+      {
+        path     : '/login',
+        name     : 'login',
+        component: Login,
+        meta     : { auth: false },
+      },
+      // USER ROUTES
+      {
+        path     : '/dashboard',
+        name     : 'dashboard',
+        component: Dashboard,
+        meta     : { auth: true },
+      },
+      // ADMIN ROUTES
+      {
+        path     : '/admin',
+        name     : 'admin.dashboard',
+        component: AdminDashboard,
+        meta     : {
+          auth: {
+            roles            : 2, redirect         : { name: 'login' }, forbiddenRedirect: '/403',
+          },
+        },
+      },
+    ],
   },
   {
     path     : '/pages',
@@ -105,13 +120,26 @@ Vue.use(require('@websanova/vue-auth'), {
   router: require('@websanova/vue-auth/drivers/router/vue-router.2.x.js'),
 })
 
-Vue.router.beforeEach((to, from, next) => {
-  const authRequired = to.matched.some((route) => route.meta.auth)
-  let authed = store.getters.isLoggedin
-  if (authRequired && !authed) {
-    next('/api/login')
-  } else {
-    next()
-  }
-})
-export default router
+// router.beforeEach(
+//   (to, from, next) => {
+//     if (to.matched.some(record => record.meta.forVisitors)) {
+//       if (Vue.auth.isAuthenticated()) {
+//         next({
+//           path: '/feed'
+//         })
+//       } else
+//         next()
+//     }
+//     else if (to.matched.some(record => record.meta.forAuth)) {
+//       if (!Vue.auth.isAuthenticated()) {
+//         next({
+//           path: '/login'
+//         })
+//       } else
+//         next()
+//     } else
+//       next()
+//   }
+// );
+export default router;
+

@@ -108,7 +108,6 @@
 
         registerUser(this.$data.formRegister)
           .then(res => {
-            console.log(res);
             this.$store.commit("registerSuccess", res);
             this.$router.push({path: '/login'});
           })

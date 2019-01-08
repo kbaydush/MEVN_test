@@ -1,10 +1,12 @@
 import Vue from 'vue';
 import { db } from '../firebase'
 import router from '../router/index'
-import {HTTP} from '../axios';
+// import {HTTP} from '../axios';
+import UsersApi from '@/api/Users';
+// import {login} from "./mutations";
 
 export const loadTasks = ({commit, state}) => {
-  const tasks = db.collection('tasks')
+  const tasks = db.collection('tasks').orderBy('createdAt')
     //.orderBy(state.orderBy)
 
   tasks.onSnapshot(querySnapshot => {
@@ -17,8 +19,20 @@ export const loadTasks = ({commit, state}) => {
   })
 };
 
-export const addNewTask = ({commit}, newPark) => {
-  db.collection('tasks').add(newPark)
+export const getUsers = (context) => {
+  UsersApi
+    .getUsers()
+    .then(response => {
+      context.commit('setUsers', response.data);
+    })
+    .catch(error => {
+      console.log(error)
+      // @TODO handle the error -> notification system
+    });
+};
+
+export const addNewTask = ({commit}, newTask) => {
+  db.collection('tasks').add(newTask)
   router.push('/tasks')
 };
 
@@ -67,14 +81,18 @@ export const clearMessage = ({commit}) => {
   commit('clearMessage')
 };
 
-// export const setParkState = ({commit}, strState) => {
+// export const setTaskState = ({commit}, strState) => {
 //   if(strState === 'United States Virgin Islands'){
-//     commit('setParkState', 'VI')
+//     commit('setTaskState', 'VI')
 //   } else {
-//     commit('setParkState', strState)
+//     commit('setTaskState', strState)
 //   }
 // };
 
 export const setLoading = ({commit}, status) => {
   commit('setLoading', status)
 };
+
+export const login = context => {
+  context.commit("login");
+}

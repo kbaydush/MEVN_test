@@ -1,13 +1,48 @@
-# Laravel CoreUI Vue - Engineering Test
+# Laravel + Vue + Firebase - Engineering Test
 
-> Laravel + CoreUI + Vue Boilerplate
+> Laravel + CoreUI + Vue Boilerplate + firebase
 
-[![PHP version](https://badge.fury.io/ph/adenvt%2Flaravel-coreui-vue.svg)](https://badge.fury.io/ph/adenvt%2Flaravel-coreui-vue)
-[![Build Status](https://travis-ci.com/adenvt/laravel-coreui-vue.svg?branch=master)](https://travis-ci.com/adenvt/laravel-coreui-vue) [![Greenkeeper badge](https://badges.greenkeeper.io/adenvt/laravel-coreui-vue.svg)](https://greenkeeper.io/)
+[![Build Status](https://travis-ci.com/kbaydush/MEVN_test.svg?branch=master)](https://travis-ci.com/kbaydush/MEVN_test) [![Greenkeeper badge](https://badges.greenkeeper.io/adenvt/laravel-coreui-vue.svg)](https://greenkeeper.io/)
+
+
+## How to Install
+* clone this repository
+```bash
+
+```
+* Install Dependencies
+```bash
+cd project_name
+
+yarn install
+```
+
+```
+* Compile Static Asset
+```bash
+## for Development
+npm run dev
+
+```
+
+```
+* Compile server
+```bash
+## for Development
+php artisan serve --port=8888
+
+```
+
+* Open browser, goto [http://localhost:8888](http://localhost:8888)
+
+## License
+MIT License
+
 
 ## What's inside
 * [Laravel][laravel] 5.7, A PHP framework for web artisans
 * [Core UI][coreui] for Vue, Free Bootstrap Admin Template
+* [firebase]: https://firebase.google.com
 * Usefull library: [Axios][axios], [jQuery][jquery], [Moment.js][moment], [Lodash][lodash]
 * [Vue Router][vue-router] and [Vuex][vuex], set out of the box
 * PWA ready, powered by [Offline-plugin][offline-plugin] and [Workbox][workbox]
@@ -28,75 +63,7 @@
 * **NPM** >= 5.6.0
 * For Ubuntu, require `apt-get install libpng16-dev`, [see](https://github.com/imagemin/imagemin-mozjpeg/issues/28)
 
-## How to Install
-* Install using composer (doesn't need to clone)
-```bash
-composer create-project --prefer-dist adenvt/laravel-coreui-vue project_name
-```
-* Install Dependencies
-```bash
-cd project_name
 
-npm install
-```
-* Add write permission (Unix)
-```bash
-chmod -R go+w storage bootstrap/cache
-```
-* Compile Static Asset
-```bash
-## for Development
-npm run dev
-
-## for Production
-npm run prod
-
-## for Development with HMR (Hot Module Replacement)
-npm run hot
-```
-
-## Using Docker Compose
-
-### For Development
-* Create and start Container
-```bash
-docker-compose up -d dev
-```
-
-* Enter workspace
-```bash
-docker-compose exec dev bash
-```
-
-* Install Depencies
-```
-composer install
-npm install
-```
-
-* Compile Static Asset
-```bash
-## Single run compile
-npm run dev
-
-## or watch and compile every change
-npm run watch
-
-## or using Hot Module Replacement
-npm run hot
-```
-* Open browser, goto `http://localhost:8888`
-
-### For Production
-* Create and start Container
-```
-docker-compose up -d prod
-```
-
-* Open browser, goto [http://localhost:88](http://localhost:88)
-
-## License
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
 
 [laravel]: https://laravel.com
 [coreui]: https://coreui.io
@@ -112,3 +79,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 [docker-compose]: https://docs.docker.com/compose/
 [offline-plugin]: https://github.com/NekR/offline-plugin
 [workbox]: https://developers.google.com/web/tools/workbox/
+[firebase]: https://firebase.google.com
