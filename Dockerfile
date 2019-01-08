@@ -1,14 +1,14 @@
 FROM node:8 AS compiler
 
-LABEL maintainer="Ade Novid <adenvt@gmail.com>"
+LABEL maintainer="<kostiantyn.baidush@gmail.com>"
 
 WORKDIR /var/www
 COPY package.json /var/www
-COPY package-lock.json /var/www
-RUN npm ci
+COPY yarn.lock /var/www
+RUN yarn install
 
 COPY . /var/www
-RUN npm run prod
+RUN yarn run prod
 RUN rm -rf /var/www/node_modules/
 
 FROM php:7.2-fpm AS server
@@ -26,7 +26,7 @@ RUN docker-php-ext-install zip
 
 WORKDIR /var/www
 
-ENV TZ=Asia/Jakarta
+ENV TZ=Europe/Kiev
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 ENV COMPOSER_ALLOW_SUPERUSER=1
@@ -62,9 +62,9 @@ RUN grep -q "APP_KEY=" .env || echo "APP_KEY=" >> .env
 RUN php artisan key:generate \
   && php artisan config:cache \
   && php artisan route:cache \
-  && php artisan view:cache
-RUN chown -R www-data:www-data /var/www
-RUN rm -rf /var/www/html/ /var/www/deploy/
+  && php artisan view:cache; exit 0
+RUN chown -R www-data:www-data /var/www; exit 0
+RUN rm -rf /var/www/html/ /var/www/deploy/; exit 0
 
 EXPOSE 80 443
 
