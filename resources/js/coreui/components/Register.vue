@@ -1,7 +1,7 @@
 <template>
   <div class="app flex-row align-items-center">
     <div class="container">
-      <b-form @submit="register">
+      <b-form @submit.prevent="register">
         <b-row class="justify-content-center">
           <b-col
             md="6"

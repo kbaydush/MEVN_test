@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <b-form @submit="addTask(title, desc, status)">
+    <b-form @submit.prevent="addTask(title, desc, status)">
   <b-row>
     <b-col md="6">
       <b-card>
@@ -45,7 +45,7 @@
         <b-button
           variant="primary"
           type="submit"
-          class="px-4">Submit</b-button>
+          class="px-4" @submit.prevent="false">Submit</b-button>
       </b-card>
     </b-col>
   </b-row>
@@ -81,8 +81,14 @@
         const createdAt = new Date()
         const uId = this.currentUser
         const userId = uId.id
-        db.collection('tasks').add({ title: title, desc: desc, createdAt: createdAt, status: status, userId: userId });
-        this.$router.push({path: '/list'});
+        db.collection('tasks').add({ title: title, desc: desc, createdAt: createdAt, status: status, userId: userId })
+          .then(res => {
+            this.$router.push({path: '/list'});
+          })
+          .catch(error => {
+
+          })
+
       }
     }
   }

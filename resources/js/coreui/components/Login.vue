@@ -61,7 +61,7 @@
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                     <b-button
                       variant="primary"
-                      class="active mt-3">Register Now!</b-button>
+                      class="active mt-3" href="/register">Register Now!</b-button>
                   </div>
                 </b-card-body>
               </b-card>
