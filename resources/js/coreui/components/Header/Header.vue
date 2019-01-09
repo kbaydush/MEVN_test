@@ -43,22 +43,24 @@
         </li>
 
         <li>
-          <b-nav-item class="px-2 b-a-2"> <router-link to="/login" class="nav-link">Login</router-link></b-nav-item>
+          <b-button
+            variant="outline-success"
+            :pressed="true" href="/login">Log In</b-button>
+
         </li>
         <li>
           <b-nav-item class="px-3"> </b-nav-item>
         </li>
         <li>
-          <b-nav-item class="px-3"> </b-nav-item>
-        </li>
-        <li>
-          <b-nav-item class="px-2 b-a-2"><router-link to="/register" class="nav-link">Register</router-link></b-nav-item>
+          <b-button
+            variant="outline-warning"
+            :pressed="true" href="/login">Sign Up</b-button>
         </li>
       </template>
       <template v-else>
         <li class="nav-item dropdown">
           <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            {{currentUser.name}} <span class="caret"></span>
+            <b>Welcome!</b> {{currentUser.name}} <span class="caret"></span>
           </a>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
             <a href="#!" @click.prevent="logout" class="dropdown-item">Logout</a>
