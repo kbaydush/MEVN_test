@@ -65,7 +65,7 @@
                 <b-button
                   variant="success"
                   type="submit"
-                  block>Create Account</b-button>
+                  block @submit.prevent="false">Create Account</b-button>
               </b-card-body>
               <b-card-footer class="p-4">
                 <b-row>
