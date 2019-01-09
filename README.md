@@ -8,8 +8,7 @@
 
 ## How to Install
 * clone this repository
-```bash
-```
+
 * Install Dependencies
 ```bash
 cd project_name
@@ -17,7 +16,11 @@ cd project_name
 npm install
 ```
 
+* generate .env
+```cp .env.example .env
+   php artisan key:generate
 ```
+   
 * Compile Static Asset
 ```bash
 npm run dev
