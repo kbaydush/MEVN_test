@@ -81,9 +81,6 @@
         default: false,
       },
     },
-    beforeMount(){
-      this.getTasks()
-    },
     computed:{
       currentUser: function() {
         return this.$store.getters.currentUser
@@ -92,15 +89,13 @@
     firestore() {
       const uId = this.currentUser
       const userId = uId.id
-      console.log(userId);
       const query = db.collection('tasks').orderBy('createdAt').where('userId', '==', userId);
-      console.log(query);
+
       query.get().then(snapshot => {
         snapshot.docs.forEach(doc => {
 
           this.items.push(doc.data());
           // this.items.push(doc.id);
-          console.log(this.items);
         })
       })
 
@@ -109,6 +104,30 @@
       return {
         sortBy: 'createdAt',
         sortDesc: false,
+        // columns: [
+        //   {
+        //     label: 'Title',
+        //     field: 'title',
+        //     type: 'string',
+        //   },
+        //   {
+        //     label: 'Desc',
+        //     field: 'desc',
+        //     type: 'string',
+        //   },
+        //   {
+        //     label: 'Created At',
+        //     field: 'createdAt',
+        //     type: 'date',
+        //     inputFormat: 'DD-MM-YYYY HH:mm:ss', //e.g. 07-09-2017 19:16:25
+        //     outputFormat: 'DD-MM-YYYY HH:mm:ss'
+        //   },
+        //   {
+        //     label: 'Status',
+        //     field: 'status',
+        //     type: 'string',
+        //   },
+        // ],
         items: [
           // {
           //   title  : 'Samppa Nori', createdAt: '2012/01/01', desc      : 'Member', status    : 'In progress',
@@ -121,7 +140,13 @@
         fields: [
           { key: 'title'},
           { key: 'desc'},
-          { key: 'createdAt', sortable: true },
+          { key: 'createdAt', sortable: true, type: 'date', formatter: (value, key, item) => {
+
+              // let ts = item.createdAt.nanoseconds;
+              // let date = new Date(item.createdAt.TIMESTAMP);
+
+              return moment.unix(item.createdAt.seconds).format("DD-MM-YYYY HH:mm:ss")
+            }},
           { key: 'status'},
         ],
         currentPage: 1,
@@ -140,7 +165,14 @@
         return items.length
       },
       deleteRow (item) {
-        db.collection("tasks").where('title', '==', item.title).delete();
+        var del_query = db.collection('tasks').where('title', '==', item.title).where('desc', '==', item.desc);
+        del_query.get().then(function(querySnapshot) {
+          querySnapshot.forEach(function(doc) {
+            doc.ref.delete();
+          });
+        });
+        this.$router.push({path: '/list'});
+        // db.collection("tasks").where('title', '==', item.title).delete();
       },
     },
   }

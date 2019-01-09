@@ -59,7 +59,7 @@
     name: 'HelloWorld',
     data () {
       return {
-        // tasks: [],
+        tasks: [],
         title: '',
         desc: '',
         status: '',
@@ -81,7 +81,8 @@
         const createdAt = new Date()
         const uId = this.currentUser
         const userId = uId.id
-        db.collection('tasks').add({ title: title, desc: desc, createdAt: createdAt, status: status, userId: userId })
+        db.collection('tasks').add({ title: title, desc: desc, createdAt: createdAt, status: status, userId: userId });
+        this.$router.push({path: '/list'});
       }
     }
   }
