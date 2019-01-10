@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <b-form @submit="addTask(title, desc, status)">
+    <b-form @submit.prevent="addTask()">
   <b-row>
     <b-col md="6">
       <b-card>
@@ -15,7 +15,7 @@
           :horizontal="true">
           <b-form-input
             id="title"
-            v-model="title"
+            v-model="newTask.title"
             type="text"/>
         </b-form-group>
         <b-form-group
@@ -26,7 +26,7 @@
           <b-form-input
             id="desc"
             :textarea="true"
-            v-model="desc"
+            v-model="newTask.desc"
             :rows="9"
             placeholder="Description..."/>
         </b-form-group>
@@ -37,7 +37,7 @@
           :horizontal="true">
           <b-form-select
             id="status"
-            v-model="status"
+            v-model="newTask.status"
             :plain="true"
             :options="['New','In progress', 'Resolved', 'On test']"
             value="Please select"/>
@@ -45,44 +45,73 @@
         <b-button
           variant="primary"
           type="submit"
-          class="px-4">Submit</b-button>
+          class="px-4" @submit.prevent="false">Submit</b-button>
       </b-card>
     </b-col>
   </b-row>
     </b-form>
+    <ul class="errors">
+      <li v-show="!validation.title">Name cannot be empty.</li>
+      <li v-show="!validation.desc">Please provide a valid email address.</li>
+    </ul>
   </div>
 </template>
 
 <script>
   import { db } from "../../firebase";
+
   export default {
-    name: 'HelloWorld',
+    name: 'Add',
     data () {
       return {
-        tasks: [],
-        title: '',
-        desc: '',
-        status: '',
-        userId: '',
+        newTask: {
+          title: '',
+          desc: '',
+          status: '',
+          userId: '',
+        },
       }
     },
     // firestore () {
     //   return {
-    //     tasks: db.collection('tasks').orderBy('createdAt')
+    //     tasks: tasksRef,
     //   }
     // },
     computed:{
       currentUser: function() {
         return this.$store.getters.currentUser
       },
+      validation: function () {
+        return {
+          title: !!this.newTask.title.trim(),
+          desc : !!this.newTask.desc.trim(),
+          status : !!this.newTask.status.trim(),
+        }
+      },
+      isValid: function () {
+        var validation = this.validation
+        return Object.keys(validation).every(function (key) {
+          return validation[key]
+        })
+      }
     },
     methods: {
-      addTask (title, desc, status) {
-        const createdAt = new Date()
-        const uId = this.currentUser
-        const userId = uId.id
-        db.collection('tasks').add({ title: title, desc: desc, createdAt: createdAt, status: status, userId: userId });
+      addTask () {
+        if (this.isValid) {
+          this.newTask.createdAt = new Date()
+          this.newTask.uId = this.currentUser
+          this.newTask.userId = this.newTask.uId.id
+          db.collection('tasks').add(this.newTask)
+          this.newTask.title = ''
+          this.newTask.desc = ''
+          this.newTask.createdAt = ''
+          this.newTask.status = ''
+          this.newTask.userId = ''
+        }
         this.$router.push({path: '/list'});
+
+        // tasksRef.add({ title: title, desc: desc, createdAt: createdAt, status: status, userId: userId })
+
       }
     }
   }

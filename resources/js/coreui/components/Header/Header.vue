@@ -45,7 +45,7 @@
         <li>
           <b-button
             variant="outline-success"
-            :pressed="true" href="/login">Log In</b-button>
+            :pressed="true" @click.prevent="onLogin">Log In</b-button>
 
         </li>
         <li>
@@ -54,7 +54,7 @@
         <li>
           <b-button
             variant="outline-warning"
-            :pressed="true" href="/login">Sign Up</b-button>
+            :pressed="true" @click.prevent="onRegister">Sign Up</b-button>
         </li>
       </template>
       <template v-else>
@@ -118,6 +118,12 @@ export default {
       this.$store.commit('logout');
       this.$router.push('/login');
     },
+    onLogin() {
+      this.$router.push({name: 'login'});
+    },
+    onRegister() {
+      this.$router.push({name: 'register'});
+    }
   },
   computed:{
     currentUser(){
@@ -127,3 +133,4 @@ export default {
 }
 
 </script>
+

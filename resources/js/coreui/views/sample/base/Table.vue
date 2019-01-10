@@ -32,7 +32,7 @@
         prev-text="Prev"
         next-text="Next"
         hide-goto-end-buttons/>
-      <b-button variant="primary" href="/add"><i class="fa fa-star"/>&nbsp; Add Task</b-button>
+      <b-button variant="primary" @click.prevent="add"><i class="fa fa-star"/>&nbsp; Add Task</b-button>
     </nav>
   </b-card>
 </template>
@@ -173,6 +173,9 @@
         });
         this.$router.push({path: '/list'});
         // db.collection("tasks").where('title', '==', item.title).delete();
+      },
+      add() {
+        this.$router.push('/add');
       },
     },
   }

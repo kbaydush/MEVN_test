@@ -1,7 +1,7 @@
 <template>
   <div class="app flex-row align-items-center">
     <div class="container">
-      <b-form @submit="register">
+      <b-form @submit.prevent="register">
         <b-row class="justify-content-center">
           <b-col
             md="6"
@@ -65,7 +65,7 @@
                 <b-button
                   variant="success"
                   type="submit"
-                  block>Create Account</b-button>
+                  block @submit.prevent="false">Create Account</b-button>
               </b-card-body>
               <b-card-footer class="p-4">
                 <b-row>
