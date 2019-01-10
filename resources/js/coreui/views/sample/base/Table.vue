@@ -1,6 +1,7 @@
 <template>
   <b-card :header="caption">
     <b-table
+      id="table"
       :sort-by.sync="sortBy"
       :sort-desc.sync="sortDesc"
       :hover="hover"
@@ -13,15 +14,17 @@
       :fields="fields"
       :current-page="currentPage"
       :per-page="perPage"
+
     >
       <template
         slot="status"
 
         slot-scope="data">
+
         <b-badge :variant="getBadge(data.item.status)">{{ data.item.status }}</b-badge>
         <b-button
           size="sm" class="float-right"
-          variant="outline-danger" @click="deleteRow(data.item)">Delete</b-button>
+          variant="outline-danger" @click.stop="deleteRow(colId)">Delete</b-button>
       </template>
     </b-table>
     <nav>
@@ -39,6 +42,7 @@
 
 <script>
   import { db } from "../../../firebase";
+  import BTableColumn from "buefy/src/components/table/TableColumn";
   /**
    * Randomize array element order in-place.
    * Using Durstenfeld shuffle algorithm.
@@ -55,6 +59,7 @@
 
   export default {
     name : 'CTable',
+    components: {BTableColumn},
     props: {
       caption: {
         type   : String,
@@ -80,6 +85,10 @@
         type   : Boolean,
         default: false,
       },
+      // key: {
+      //   type   : String,
+      //   default: '',
+      // },
     },
     computed:{
       currentUser: function() {
@@ -94,8 +103,21 @@
       query.get().then(snapshot => {
         snapshot.docs.forEach(doc => {
 
-          this.items.push(doc.data());
+          // doc.data().key
+          // split(salad).forEach(function(item) {
+          //
+          //   console.log(item.key, item.value)
+          // })
+          // this.items.
+          let item = doc.data()
+          item.id = doc.id
+          this.items.push(item);
+          this.colId = doc.id;
           // this.items.push(doc.id);
+          // this.items.push(doc.id);
+          // this.colId = doc.id;
+          // let z = Object.assign(doc.data(), doc.id)
+          // console.log(this.items)
         })
       })
 
@@ -104,6 +126,7 @@
       return {
         sortBy: 'createdAt',
         sortDesc: false,
+        colId: '',
         // columns: [
         //   {
         //     label: 'Title',
@@ -164,15 +187,14 @@
       getRowCount (items) {
         return items.length
       },
-      deleteRow (item) {
-        var del_query = db.collection('tasks').where('title', '==', item.title).where('desc', '==', item.desc);
-        del_query.get().then(function(querySnapshot) {
-          querySnapshot.forEach(function(doc) {
-            doc.ref.delete();
-          });
+      deleteRow (id) {
+
+        db.collection('tasks').doc(id).delete().then(() => {
+          this.$router.go(-1)
+        }).catch((err) => {
+          alert("Error removing document: ", err)
         });
-        this.$router.push({path: '/list'});
-        // db.collection("tasks").where('title', '==', item.title).delete();
+
       },
       add() {
         this.$router.push('/add');

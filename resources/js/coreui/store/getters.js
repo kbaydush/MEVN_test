@@ -84,3 +84,5 @@ export const userListInSidebar = state => {
 
   return items;
 }
+
+export const tasks = state => state.items

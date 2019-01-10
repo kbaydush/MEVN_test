@@ -68,3 +68,13 @@ export const registerFailed = (state, payload) => {
   state.reg_error = payload.error;
 }
 
+export const set_tasks_state = (state, tasks) => {
+    state.tasks = tasks
+  }
+export const remove_tasks_state = (state, id) => {
+    state.tasksItems.filter(task => {
+      return task.id != id
+    })
+}
+
+
