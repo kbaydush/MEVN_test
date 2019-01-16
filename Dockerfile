@@ -7,7 +7,7 @@ COPY package.json /var/www
 COPY package-lock.json /var/www
 RUN npm install
 
-COPY . /var/www
+COPY .. /var/www
 RUN npm run dev
 RUN rm -rf /var/www/node_modules/
 
