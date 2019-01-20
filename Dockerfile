@@ -2,14 +2,14 @@ FROM node:11 AS compiler
 
 LABEL maintainer="<kostiantyn.baidush@gmail.com>"
 
-WORKDIR /var/www
-COPY package.json /var/www
-COPY package-lock.json /var/www
+WORKDIR ./
+COPY package.json ./
+COPY package-lock.json ./
 RUN npm install
 
-COPY .. /var/www
+COPY . ./
 RUN npm run dev
-RUN rm -rf /var/www/node_modules/
+RUN rm -rf ./node_modules/
 
 FROM php:7.2-fpm AS server
 RUN set -x \
@@ -24,7 +24,7 @@ RUN set -x \
   && apt-get clean
 RUN docker-php-ext-install zip
 
-WORKDIR /var/www
+WORKDIR ./
 
 ENV TZ=Europe/Kiev
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
@@ -56,16 +56,16 @@ RUN if [ ${FORCE_HTTPS} = true ]; then \
   sed -i 's/# fastcgi_param HTTPS/fastcgi_param HTTPS/' /etc/nginx/sites-available/default \
 ;fi
 
-COPY --from=compiler /var/www /var/www
+COPY --from=compiler ./ ./
 RUN composer dump-autoload --no-dev --optimize
-RUN grep -q "APP_KEY=" .env || echo "APP_KEY=" >> .env
+RUN grep -q "APP_KEY=base64:HxJ5FeIw6Q9MCkWeIN7j7Uqh9sHp1XZBHD8oGhhyuHM=" || echo "APP_KEY=" >> .env
 RUN php artisan key:generate \
   && php artisan config:cache \
   && php artisan route:cache \
-  && php artisan view:cache; exit 0
-RUN chown -R www-data:www-data /var/www; exit 0
-RUN rm -rf /var/www/html/ /var/www/deploy/; exit 0
+  && php artisan view:cache;
+RUN chown -R www-data:www-data ./;
+RUN rm -rf ./html/ ./deploy/;
 
-EXPOSE 80 443
+EXPOSE 8080 443
 
 CMD service nginx start && php-fpm

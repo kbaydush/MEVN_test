@@ -1,6 +1,6 @@
 FROM php:7.2-fpm
 
-LABEL maintainer="Ade Novid <adenvt@gmail.com>"
+LABEL maintainer="kostix <kostiantyn.baidush@gmail.com>"
 
 WORKDIR /var/www
 
@@ -27,7 +27,7 @@ RUN apt-get install --no-install-recommends --no-install-suggests -y \
 # Install PHP Plugin
 RUN docker-php-ext-install zip
 
-ENV TZ=Asia/Jakarta
+ENV TZ=Europe/Kiev
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 # Install Composer
