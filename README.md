@@ -5,6 +5,7 @@
 
 [![Build Status](https://travis-ci.com/kbaydush/MEVN_test.svg?branch=master)](https://travis-ci.com/kbaydush/MEVN_test) [![Greenkeeper badge](https://badges.greenkeeper.io/adenvt/laravel-coreui-vue.svg)](https://greenkeeper.io/)
 
+DEMO: http://takeseat.io
 
 ## How to Install
 * clone this repository
