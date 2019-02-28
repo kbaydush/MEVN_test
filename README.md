@@ -1,4 +1,4 @@
-# Laravel + MEVN + Firebase
+# Laravel + VUE JS + Firebase
 
 > Engineering test
 
